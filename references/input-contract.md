@@ -7,7 +7,7 @@
 - 已测试目标：ChatGPT Work的Linux运行环境；Python依赖见requirements.txt。
 - Excel生成使用Work内置的`@oai/artifact-tool`和Node；脚本自动读取`CODEX_PRIMARY_RUNTIME_NODE`及`CODEX_PRIMARY_RUNTIME_NODE_MODULES`。其他环境须先使Node能解析该包；缺少时明确阻断，不另换库拼出未经验证的文件。
 - PDF使用PATH中的LibreOffice/soffice；逐页图片使用PyMuPDF。字体预检依赖fontconfig的fc-list。`assets/fonts/`中的字体通过独立FONTCONFIG_FILE提供给预检和排版引擎，不改系统字体配置。Windows/macOS请安装字体目录中的字体并使用经验证的本机排版流程，不声称自动加载已经跨平台测试。
-- 本项目使用方正小标宋简体、仿宋_GB2312、楷体_GB2312、Times New Roman和黑体（SimHei）；公开仓库不附带字体二进制，须自行取得授权后放入`assets/fonts/`。不得把其他字体或伪造别名当成目标字体；包内文件、内部名称和字形均须校验；详见fonts.md。黑体来源为非商业公开字体包，商业分发前须核实授权。
+- 本项目随仓库提供方正小标宋简体、仿宋_GB2312、楷体_GB2312、Times New Roman和黑体（SimHei），位于`assets/fonts/`；字体权利归各自厂商，公开再分发前请确认授权。不得把其他字体或伪造别名当成目标字体；包内文件、内部名称和字形均须校验；详见fonts.md。黑体来源为非商业公开字体包，商业分发前须核实授权。
 - Work Mode执行命令时将示例中的python替换为`$CODEX_PRIMARY_RUNTIME_PYTHON`。首次实际制作前，执行本环境Word/Excel技能要求的制作标记；本包不硬编码平台内部标记路径。
 
 ## DOCX

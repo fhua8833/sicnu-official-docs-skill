@@ -2,17 +2,18 @@
   "name": "sicsu-official-docs",
   "version": "2.2.0",
   "regression_tests_passed": 27,
-  "distribution": "source-only public repository; font binaries and the source-standard PDF are not included",
-  "bundled_fonts": [],
-  "not_bundled": [
+  "distribution": "public repository with bundled font binaries; source-standard PDF is not included",
+  "bundled_fonts": [
     "楷体_GB2312",
     "方正小标宋简体",
     "仿宋_GB2312",
     "Times New Roman",
     "黑体"
   ],
-  "font_loading": "Fonts are not distributed; place licensed files in assets/fonts/ and verify against manifest.json",
-  "compliance_note": "Source-only distribution. The five fonts (楷体_GB2312, 方正小标宋简体, 仿宋_GB2312, Times New Roman, 黑体/SimHei) must be supplied locally under their respective licences. Machine checks and the standard examples pass only after the fonts are present; no final compliance claim is made until the required page-by-page human review is complete.",
+  "not_bundled": [],
+  "font_loading": "Private fontconfig for Linux/Work; five font files in assets/fonts/, names, SHA-256, cmap and PDF font face/embedding checked",
+  "compliance_note": "Five bundled fonts (楷体_GB2312, 方正小标宋简体, 仿宋_GB2312, Times New Roman, 黑体/SimHei) are included in assets/fonts/ and used by the PDF engine. Machine checks and the standard examples pass, but no final compliance claim is made until the required page-by-page human review is complete. Fonts remain subject to their vendors' licences.",
   "regression_tests_skipped": 1,
-  "font_source": "黑体/SimHei and full Times New Roman from 浙江师范大学外国语学院《常用办公字体（字库）》(2024-11-10) public package; non-commercial use, verify vendor licence before commercial distribution."
+  "font_source": "黑体/SimHei and full Times New Roman from 浙江师范大学外国语学院《常用办公字体（字库）》(2024-11-10) public package; non-commercial use, verify vendor licence before commercial distribution.",
+  "source_standard_pdf": "not included; references/format-standard.md is the operational source. Place an authorised copy at assets/source-standard-2026.pdf if needed."
 }

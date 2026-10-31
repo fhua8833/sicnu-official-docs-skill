@@ -14,9 +14,9 @@
 - `scripts/test_office.py`：回归测试。
 - `examples/`：通知、名单两个输入示例。
 
-## 字体不随仓库分发
+## 字体随仓库分发
 
-本仓库**不包含字体二进制文件**。`楷体_GB2312`、`方正小标宋简体`、`仿宋_GB2312`、`Times New Roman`、`黑体（SimHei）` 均为第三方字体；公开再分发需要相应授权，尤其是方正字体和 Times New Roman。请自行取得授权后，把文件放入 `assets/fonts/`，文件名和内部名称必须与 `assets/fonts/manifest.json` 一致：
+本仓库直接包含 `assets/fonts/` 下的 5 个字体文件。`doctor` 会核对文件名、SHA-256 和内部 family，Linux/Work 环境通过独立 Fontconfig 私有加载，不需要安装到系统：
 
 | 文件 | 字体内部名称 |
 |---|---|
@@ -26,9 +26,9 @@
 | `times-new-roman.ttf` | Times New Roman |
 | `simhei.ttf` | 黑体（SimHei） |
 
-未放字体时，`doctor` 会以 `missing_fonts` / `包内字体文件缺失` 阻断，这是预期行为，不是脚本故障。字体来源和授权提示见 `references/fonts.md`。
+字体权利归各自厂商。`references/fonts.md` 记录了来源和授权提示；公开再分发前请确认你已获得相应授权，尤其是方正字体和 Times New Roman。
 
-原始标准 PDF 也未放入仓库：如你持有可公开的版本，放到 `assets/source-standard-2026.pdf`；代码不依赖该文件，`references/format-standard.md` 已固化执行参数。
+原始标准 PDF 未放入仓库：如需原文，把有公开权限的版本放到 `assets/source-standard-2026.pdf`；代码不依赖该文件，`references/format-standard.md` 已固化执行参数。
 
 ## 快速开始
 

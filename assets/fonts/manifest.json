@@ -73,6 +73,5 @@
       ]
     }
   ],
-  "not_bundled": [],
-  "public_repo_note": "Font binaries are not included in the public source-only repository; supply licensed files under their expected names before running doctor or release."
+  "not_bundled": []
 }

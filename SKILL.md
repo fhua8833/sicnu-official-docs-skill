@@ -11,7 +11,7 @@ description: 按四川师范大学学生会2026年公文标准制作、审校Wor
 
 使用本环境指定Python（Work Mode优先 `$CODEX_PRIMARY_RUNTIME_PYTHON`；普通Linux使用已安装依赖的Python）。命令在技能根目录运行，路径有空格须加引号。
 
-本项目使用楷体_GB2312、方正小标宋简体、仿宋_GB2312、Times New Roman和黑体。公开仓库不附带字体二进制；首次运行前须按`assets/fonts/README.md`放入已授权字体（文件名和内部名称须与`assets/fonts/manifest.json`一致），否则doctor会以缺字体阻断。Linux/Work环境的doctor与PDF导出会在本地私有加载，无须预先安装到系统；详见`references/fonts.md`。黑体为SimHei（GB18030，28,562字形，可编辑嵌入），取自浙江师范大学外国语学院公开字体包；不得用其他字体改名冒充。替换字体时运行`python scripts/add_fonts.py "黑体文件路径"`后重新预检。
+本项目使用楷体_GB2312、方正小标宋简体、仿宋_GB2312、Times New Roman和黑体。随仓库提供这5个字体文件，位于`assets/fonts/`；doctor会核对文件名、SHA-256和内部family。Linux/Work环境的doctor与PDF导出会在本地私有加载，无须预先安装到系统；详见`references/fonts.md`。黑体为SimHei（GB18030，28,562字形，可编辑嵌入），取自浙江师范大学外国语学院公开字体包；不得用其他字体改名冒充。替换字体时运行`python scripts/add_fonts.py "黑体文件路径"`后重新预检。
 
 ```bash
 python scripts/office.py doctor examples/notice.json
