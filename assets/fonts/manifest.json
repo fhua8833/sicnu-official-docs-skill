@@ -1,0 +1,78 @@
+{
+  "fonts": [
+    {
+      "file": "kaiti-gb2312.ttf",
+      "family": "楷体_GB2312",
+      "internal_families": [
+        "KaiTi_GB2312",
+        "楷体_GB2312"
+      ],
+      "sha256": "99092cbb0df301625f46509e85854db8685556551742097ab3fbbc2e2ca0778b",
+      "size_bytes": 4135804,
+      "embedding_flags": 0,
+      "postscript_names": [
+        "KaiTi_GB2312",
+        "楷体_GB2312"
+      ]
+    },
+    {
+      "file": "fzxiaobiaosong.ttf",
+      "family": "方正小标宋简体",
+      "internal_families": [
+        "FZXiaoBiaoSong-B05S",
+        "方正小标宋简体"
+      ],
+      "sha256": "f6154b97ee71bad19efa7f78edc152cf515c1f943220fc6e98360005d53d1c62",
+      "size_bytes": 3835244,
+      "embedding_flags": 2,
+      "postscript_names": [
+        "FZXBSJW--GB1-0"
+      ]
+    },
+    {
+      "file": "fangsong-gb2312.ttf",
+      "family": "仿宋_GB2312",
+      "internal_families": [
+        "FangSong_GB2312",
+        "仿宋_GB2312"
+      ],
+      "sha256": "fef7cf991b458cabd184b73378918d9d15429010e1d6c804f08d394395c3c3b4",
+      "size_bytes": 3996872,
+      "embedding_flags": 0,
+      "postscript_names": [
+        "FangSong_GB2312",
+        "仿宋_GB2312"
+      ]
+    },
+    {
+      "file": "times-new-roman.ttf",
+      "family": "Times New Roman",
+      "internal_families": [
+        "Times New Roman"
+      ],
+      "sha256": "43a890795ad133d73568d169a35924f40416be8a6950a1a03263052ec8e95b8a",
+      "size_bytes": 1206884,
+      "embedding_flags": 8,
+      "postscript_names": [
+        "TimesNewRomanPSMT"
+      ]
+    },
+    {
+      "file": "simhei.ttf",
+      "family": "黑体",
+      "internal_families": [
+        "SimHei",
+        "黑体"
+      ],
+      "sha256": "aa4560dd8fe5645745fed3ffa301c3ca4d6c03cbd738145b613303961ba733b8",
+      "size_bytes": 9753388,
+      "embedding_flags": 8,
+      "postscript_names": [
+        "SimHei",
+        "黑体"
+      ]
+    }
+  ],
+  "not_bundled": [],
+  "public_repo_note": "Font binaries are not included in the public source-only repository; supply licensed files under their expected names before running doctor or release."
+}

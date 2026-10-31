@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+output/
+.DS_Store
+assets/fonts/*.ttf
+assets/source-standard-2026.pdf

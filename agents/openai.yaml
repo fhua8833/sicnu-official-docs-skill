@@ -1,0 +1,4 @@
+interface:
+  display_name: "川师学生会公文规范"
+  short_description: "按2026年公文标准制作和审校Word与Excel并强制交付对应PDF"
+  default_prompt: "使用 $sicsu-official-docs 按四川师范大学学生会2026年公文标准制作文件，逐页审查纠错，并同时交付可编辑文件和对应PDF。"
