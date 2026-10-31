@@ -1,6 +1,6 @@
 # 川师学生会公文规范 Skill
 
-按《四川师范大学学生会公文排版格式标准（2026年版）》生成、审校 Word / Excel，并强制同源导出 PDF。仓库内容是可执行的 Skill：格式规则、生成器、机检脚本、示例和回归测试。
+面向**四川师范大学公文格式**与**川师大公文排版**场景，按《四川师范大学学生会公文排版格式标准（2026年版）》生成、审校 Word / Excel，并强制同源导出 PDF。仓库内容是可执行的 Skill：格式规则、生成器、机检脚本、示例和回归测试。
 
 > 这是按标准固化的排版工具，不是发布单位的正式解释。出现对齐等歧义时，以发布单位解释为准；本仓库沿用 `references/format-standard.md` 记录的执行约定。
 
@@ -55,3 +55,12 @@ python scripts/test_office.py
 ## 权利说明
 
 代码按原样提供，未附开源许可证；如需 MIT/Apache 等许可证请先确认。规范文本、字体和原始标准 PDF 的权利归各自权利人，不在本仓库的授权范围内。使用前请确认你所在单位允许公开这些内容，并遵守字体厂商的授权条款。
+
+<details>
+<summary>搜索关键词 / Keywords</summary>
+
+四川师范大学公文格式、四川师范大学公文排版、四川师范大学学生会公文规范、川师大公文格式、川师大公文排版、川师学生会、SICNU、学生会公文、公文格式标准、公文排版格式标准、公文写作、公文模板、红头文件、通知模板、名单模板、报名表、Word 公文排版、Excel 名单、DOCX、XLSX、PDF 导出、方正小标宋、仿宋_GB2312、黑体、三号字、固定行距、页边距、页码、附件、落款、量化证明。
+
+English: SICNU, Sichuan Normal University, student union, official document format, Chinese official document, gongwen, document layout, Word template, DOCX, XLSX, python-docx, PDF export.
+
+</details>
