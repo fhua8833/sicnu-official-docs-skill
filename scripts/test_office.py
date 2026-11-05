@@ -89,6 +89,16 @@ class Tests(unittest.TestCase):
         first=r.find('.//w:body/w:p',o.NS)
         self.assertEqual(first.find('w:pPr/w:pStyle',o.NS).get(o.tag(o.W,'val')),'Title')
         self.assertEqual(len(first.findall('.//w:br',o.NS)),1)
+    def test_keep_next_block_stays_with_following(self):
+        s=doc();s['blocks']=[{'role':'body','text':'成绩公布：','keep_next':True},{'role':'body','text':'1号成绩为：'}]
+        p=self.work/'keepnext.docx';o.create_docx(s,p)
+        self.assertEqual(o.audit_source(p,s),[])
+        from docx import Document
+        paras=[x for x in Document(p).paragraphs if x.text.strip()]
+        self.assertTrue(paras[0].paragraph_format.keep_with_next)
+        self.assertFalse(paras[-1].paragraph_format.keep_with_next)
+        bad=doc();bad['blocks']=[{'role':'body','text':'示例','keep_next':'yes'}]
+        with self.assertRaises(o.Blocked):o.validate(bad)
     def test_multiple_attachments_keep_required_space_and_alignment(self):
         s=doc();s['attachments']=[
             {'name':'报名表','blocks':[{'role':'body','text':'附件一正文'}]},

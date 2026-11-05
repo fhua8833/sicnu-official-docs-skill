@@ -152,6 +152,7 @@ def validate(spec):
     need(blocks,'没有正文')
     for b in blocks:
         role=b.get('role');need(role in ('body','h1','h2','h3','h4','table','image','pagebreak'),'未知block.role，不能默认为正文')
+        need(isinstance(b.get('keep_next',False),bool),'keep_next须为布尔值')
         if role=='table': normalized_table(b)
         elif role=='image': need(Path(b.get('path','')).is_file() and b.get('caption'),'图片缺真实文件或说明')
         elif role!='pagebreak':
@@ -280,7 +281,9 @@ def create_docx(spec, path):
                 width=float(b.get('width_mm',120));need(0<width<=156,'图片宽度超版心')
                 need(abs(ratio-4/3)<.04 or abs(ratio-16/9)<.04 or b.get('ratio_exception'),'图片非4:3/16:9，需明确ratio_exception并登记')
                 p=paragraph(doc,'','Image');p.add_run().add_picture(b['path'],width=Cm(width/10));paragraph(doc,b['caption'],'Caption')
-            else: paragraph(doc,b['text'],role)
+            else:
+                p=paragraph(doc,b['text'],role)
+                if b.get('keep_next'):p.paragraph_format.keep_with_next=True
     if spec.get('confidential'):
         paragraph(doc,spec['confidential'],'Secret');paragraph(doc,spec['scope'],'Scope');paragraph(doc,'','Blank')
     paragraph(doc,spec['title'],'Title')
