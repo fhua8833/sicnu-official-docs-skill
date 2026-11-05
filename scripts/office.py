@@ -182,7 +182,7 @@ def paragraph(doc, value='', role='body', **overrides):
     pf.alignment={'center':WD_ALIGN_PARAGRAPH.CENTER,'both':WD_ALIGN_PARAGRAPH.JUSTIFY,'left':WD_ALIGN_PARAGRAPH.LEFT,'right':WD_ALIGN_PARAGRAPH.RIGHT}[align]
     if line is None: pf.line_spacing=1.0
     else: pf.line_spacing=Pt(line);pf.line_spacing_rule=WD_LINE_SPACING.EXACTLY
-    pf.left_indent=Pt(0);pf.right_indent=Pt(0);pf.first_line_indent=Pt(0)
+    pf.left_indent=Pt(0);pf.right_indent=Pt(0);pf.first_line_indent=Pt(size*indent)
     ind=p._p.get_or_add_pPr().get_or_add_ind();ind.set(qn('w:firstLineChars'),str(indent*100))
     pf.keep_with_next=role in ('Title','Subtitle','Meta','h1','h2','h3','h4','TableTitle','Attachment','Secret','Scope')
     pf.keep_together=role not in ('body','Blank')
@@ -514,7 +514,8 @@ def audit_source(source,spec):
                         check(spacing is not None and spacing.get(tag(W,'line'))==str(round(line*20) if line else 240) and spacing.get(tag(W,'lineRule'))==('exact' if line else 'auto'),'行距错误：'+role)
                         jc=p.find('w:pPr/w:jc',NS);check(jc is not None and jc.get(tag(W,'val'))==align,'段落对齐错误：'+role)
                     if indent:
-                        ind=p.find('w:pPr/w:ind',NS);check(ind is not None and ind.get(tag(W,'firstLineChars'))==str(indent*100),'首行缩进错误：'+role)
+                        ind=p.find('w:pPr/w:ind',NS);check(ind is not None and ind.get(tag(W,'firstLineChars'))==str(indent*100),'首行缩进字符数错误：'+role)
+                        check(ind is not None and ind.get(tag(W,'firstLine'))==str(round(size*indent*20)),'首行缩进实际值错误：'+role)
                     for run in p.findall('.//w:r',NS):
                         if not ''.join(run.itertext()):continue
                         rf=run.find('w:rPr/w:rFonts',NS);sz=run.find('w:rPr/w:sz',NS);color=run.find('w:rPr/w:color',NS)

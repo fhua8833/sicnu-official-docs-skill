@@ -99,6 +99,18 @@ class Tests(unittest.TestCase):
         self.assertFalse(paras[-1].paragraph_format.keep_with_next)
         bad=doc();bad['blocks']=[{'role':'body','text':'示例','keep_next':'yes'}]
         with self.assertRaises(o.Blocked):o.validate(bad)
+    def test_first_line_indent_written_as_twips_not_only_chars(self):
+        s=doc();p=self.work/'indent.docx';o.create_docx(s,p)
+        self.assertEqual(o.audit_source(p,s),[])
+        with o.ZipFile(p) as z:r=E.fromstring(z.read('word/document.xml'))
+        body=next(x for x in r.findall('.//w:p',o.NS)
+                  if x.find('w:pPr/w:pStyle',o.NS).get(o.tag(o.W,'val'))=='SICSU_body')
+        ind=body.find('w:pPr/w:ind',o.NS)
+        # 2 characters at 三号 16pt = 32pt = 640 twips; LibreOffice honours firstLine only.
+        self.assertEqual(ind.get(o.tag(o.W,'firstLine')),'640')
+        self.assertEqual(ind.get(o.tag(o.W,'firstLineChars')),'200')
+        ind.set(o.tag(o.W,'firstLine'),'0');o.xml_update(p,{'word/document.xml':r})
+        self.assertTrue(any('首行缩进实际值' in x for x in o.audit_source(p,s)))
     def test_multiple_attachments_keep_required_space_and_alignment(self):
         s=doc();s['attachments']=[
             {'name':'报名表','blocks':[{'role':'body','text':'附件一正文'}]},
