@@ -72,6 +72,23 @@ class Tests(unittest.TestCase):
         s['attachments']=[{'name':'信息表','blocks':[t]}]
         p=self.work/'attachment.docx';o.create_docx(s,p)
         self.assertEqual(o.audit_source(p,s),[])
+    def test_script_without_signature_block(self):
+        s=doc();s['signature']=False;p=self.work/'script.docx';o.create_docx(s,p)
+        self.assertEqual(o.audit_source(p,s),[])
+        with o.ZipFile(p) as z:r=E.fromstring(z.read('word/document.xml'))
+        self.assertFalse(any(x.find('w:pPr/w:pStyle',o.NS) is not None
+                             and x.find('w:pPr/w:pStyle',o.NS).get(o.tag(o.W,'val'))=='SICSU_Signature'
+                             for x in r.findall('.//w:p',o.NS)))
+        bad=doc();bad['signature']='no'
+        with self.assertRaises(o.Blocked):o.validate(bad)
+    def test_multiline_title_breaks_inside_title_paragraph(self):
+        s=doc();s['title']='测试公文标题\n第二行保持词意完整'
+        p=self.work/'title.docx';o.create_docx(s,p)
+        self.assertEqual(o.audit_source(p,s),[])
+        with o.ZipFile(p) as z:r=E.fromstring(z.read('word/document.xml'))
+        first=r.find('.//w:body/w:p',o.NS)
+        self.assertEqual(first.find('w:pPr/w:pStyle',o.NS).get(o.tag(o.W,'val')),'Title')
+        self.assertEqual(len(first.findall('.//w:br',o.NS)),1)
     def test_multiple_attachments_keep_required_space_and_alignment(self):
         s=doc();s['attachments']=[
             {'name':'报名表','blocks':[{'role':'body','text':'附件一正文'}]},

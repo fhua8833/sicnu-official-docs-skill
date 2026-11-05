@@ -14,7 +14,7 @@
 
 顶层必填：`kind:"docx"`、`title`、`organization`、`date`、`blocks`。date为真实ISO日期，如`2026-10-18`。
 
-可选：`subtitle`、`meta_date`（显示用中文日期）、`author`、`confidential`（内部资料或保密资料）、`scope`、`attachments`。
+可选：`subtitle`、`meta_date`（显示用中文日期）、`author`、`confidential`（内部资料或保密资料）、`scope`、`attachments`、`signature`（默认`true`；主持稿、讲话稿等不以发文机关署名的文稿写`false`，正文后不再生成空行和署名日期，`organization`与`date`仍须如实填写用于归档）。
 
 blocks支持：
 

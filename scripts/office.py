@@ -137,6 +137,7 @@ def validate(spec):
         return
     need(isinstance(spec.get('title'),str) and spec['title'].strip(),'缺少公文标题')
     need(isinstance(spec.get('organization'),str) and spec['organization'].strip(),'缺少署名组织')
+    need(isinstance(spec.get('signature',True),bool),'signature须为布尔值')
     try: date.fromisoformat(spec.get('date',''))
     except (ValueError,TypeError): raise Blocked('date必须是真实ISO日期，例如2026-10-18')
     if spec.get('confidential'):
@@ -307,11 +308,12 @@ def create_docx(spec, path):
                 base=32+width_pt('附件：',16)
             pf.left_indent=Pt(base+hanging);pf.first_line_indent=Pt(-hanging)
             p._p.pPr.ind.attrib.pop(qn('w:firstLineChars'),None)
-    for _ in range(2): paragraph(doc,'','Blank')
-    dt=date.fromisoformat(spec['date']);ds=f'{dt.year}年{dt.month}月{dt.day}日'
-    width=min(442.2,max(width_pt(spec['organization'],16),width_pt(ds,16))+12)
-    for value in [spec['organization'],ds]:
-        p=paragraph(doc,value,'Signature');p.paragraph_format.left_indent=Pt(442.2-width)
+    if spec.get('signature',True):
+        for _ in range(2): paragraph(doc,'','Blank')
+        dt=date.fromisoformat(spec['date']);ds=f'{dt.year}年{dt.month}月{dt.day}日'
+        width=min(442.2,max(width_pt(spec['organization'],16),width_pt(ds,16))+12)
+        for value in [spec['organization'],ds]:
+            p=paragraph(doc,value,'Signature');p.paragraph_format.left_indent=Pt(442.2-width)
     for i,a in enumerate(attachments,1):
         p=paragraph(doc,'附件'+(' '+str(i) if len(attachments)>1 else ''),'Attachment');p.paragraph_format.page_break_before=True
         paragraph(doc,'','Blank')
@@ -541,10 +543,10 @@ def audit_source(source,spec):
                 if style is not None and style.get(tag(W,'val')) in ('SICSU_TableTitle','SICSU_TableFooter'):
                     edge='bottom' if style.get(tag(W,'val'))=='SICSU_TableTitle' else 'top';check(p.find('w:pPr/w:pBdr/w:'+edge,NS) is not None,'表格标题/落款边框缺失')
             got=''.join(root.itertext())
-            expected=[spec['title'],spec['organization']]
+            expected=[spec['title']]+([spec['organization']] if spec.get('signature',True) else [])
             for b in spec.get('blocks',[]):
                 if b.get('role') in ('body','h1','h2','h3','h4'):expected.append(text_of(b['text']))
-            for value in expected:check(value in got,'Word内容缺失：'+value[:30])
+            for value in expected:check(value.replace('\n','') in got,'Word内容缺失：'+value[:30])
         else:
             styles=E.fromstring(z.read('xl/styles.xml'));xfs=list(styles.find('x:cellXfs',NS));fonts=list(styles.find('x:fonts',NS));borders=list(styles.find('x:borders',NS))
             wb=E.fromstring(z.read('xl/workbook.xml'));strings=[]
